@@ -43,19 +43,28 @@ public class ModifyContactTests extends TestBase {
         String[] split = message.split(": ");
         id = split[1];
     }
+
     @Test
-    public void modifyContact(){
-         String  message =
+    public void modifyContactTest(){
+        ContactDto updatedContact = ContactDto.builder()
+                .id(id)
+                .name("Tom")
+                .lastName("Johns")
+                .address("Trier")
+                .build();
+
+        // String  message =
         given()
                 .header(AUTH, token)
+                .contentType(ContentType.JSON)
+                .body(updatedContact)
                 .when()
-                .put("contacts/" + id)
+                .put("contacts/")
                 .then()
                 .assertThat().statusCode(200)
-              //  .assertThat().body("message", equalTo("Contact was deleted!"));
-        .extract().path("message");
-
-        System.out.println(message);
+                .assertThat().body("message", equalTo("Contact was updated"));
+        //.extract().path("message");
+        //System.out.println(message);
     }
 }
 
