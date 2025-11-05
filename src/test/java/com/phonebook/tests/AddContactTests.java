@@ -1,14 +1,12 @@
 package com.phonebook.tests;
 
 import com.phonebook.core.TestBase;
-import com.phonebook.dto.AuthRequestDto;
 import com.phonebook.dto.ContactDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.phonebook.data.ObjectsData.auth;
-import static com.phonebook.data.ObjectsData.dto;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
@@ -18,12 +16,7 @@ public class AddContactTests extends TestBase {
 
     @BeforeMethod
     public void preRequest() {
-        String responseToken = given()
-                .contentType(ContentType.JSON)
-                .body(auth)
-                .when()
-                .post("user/login/usernamepassword")
-                .then()
+        String responseToken = app.getUser().login(auth)
                 .assertThat().statusCode(200)
                 .extract().path("token");
         token = responseToken;
@@ -32,13 +25,7 @@ public class AddContactTests extends TestBase {
 
     @Test
     public void addContactSuccessTest() {
-        String message = given()
-                .header(AUTH, token)
-                .contentType(ContentType.JSON)
-                .body(dto)
-                .when()
-                .post("contacts")
-                .then()
+        String message = app.getContact().addContact(AUTH, token)
                 .assertThat().statusCode(200)
                 .extract().path("message");
         System.out.println(message);

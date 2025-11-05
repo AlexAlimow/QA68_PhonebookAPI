@@ -2,15 +2,10 @@ package com.phonebook.tests;
 
 import com.phonebook.core.TestBase;
 import com.phonebook.dto.ContactDto;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.phonebook.data.ObjectsData.auth;
-import static com.phonebook.data.ObjectsData.dto;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ModifyContactTests extends TestBase {
@@ -20,23 +15,12 @@ public class ModifyContactTests extends TestBase {
 
     @BeforeMethod
     public void preRequest() {
-        String responseToken = given()
-                .contentType(ContentType.JSON)
-                .body(auth)
-                .when()
-                .post("user/login/usernamepassword")
-                .then()
+        String responseToken = app.getUser().login(auth)
                 .assertThat().statusCode(200)
                 .extract().path("token");
         token = responseToken;
 
-        String message = given()
-                .header(AUTH, token)
-                .contentType(ContentType.JSON)
-                .body(dto)
-                .when()
-                .post("contacts")
-                .then()
+        String message = app.getContact().addContact(AUTH, token)
                 .assertThat().statusCode(200)
                 .extract().path("message");
 
@@ -45,7 +29,7 @@ public class ModifyContactTests extends TestBase {
     }
 
     @Test
-    public void modifyContactTest(){
+    public void modifyContactSuccessTest(){
         ContactDto updatedContact = ContactDto.builder()
                 .id(id)
                 .name("Tom")
@@ -54,17 +38,13 @@ public class ModifyContactTests extends TestBase {
                 .build();
 
         // String  message =
-        given()
-                .header(AUTH, token)
-                .contentType(ContentType.JSON)
-                .body(updatedContact)
-                .when()
-                .put("contacts/")
-                .then()
+        app.getContact().modifyContactById(updatedContact, AUTH, token)
                 .assertThat().statusCode(200)
                 .assertThat().body("message", equalTo("Contact was updated"));
         //.extract().path("message");
         //System.out.println(message);
     }
+
+
 }
 

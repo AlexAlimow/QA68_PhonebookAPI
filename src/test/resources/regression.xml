@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Regression" verbose="1">
+    <test name="Regression">
+        <classes>
+            <class name="com.phonebook.tests.LoginTests">
+                <methods>
+                    <include name=".*Success.*"/>
+                </methods>
+            </class>
+            <class name="com.phonebook.tests.GetAllContactsTests">
+                <methods>
+                    <include name=".*Success.*"/>
+                </methods>
+            </class>
+            <class name="com.phonebook.tests.AddContactTests">
+                <methods>
+                    <include name=".*Success.*"/>
+                </methods>
+            </class>
+            <class name="com.phonebook.tests.DeleteContactByIdTests">
+                <methods>
+                    <include name=".*Success.*"/>
+                </methods>
+            </class>
+            <class name="com.phonebook.tests.ModifyContactTests">
+                <methods>
+                    <include name=".*Success.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

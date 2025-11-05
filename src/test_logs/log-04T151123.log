@@ -1,0 +1,20 @@
+15:11:24.490 [Test worker] INFO  com.phonebook.core.TestBase -- Start test: loginSuccessTest with data []
+15:11:27.102 [Test worker] INFO  com.phonebook.core.TestBase -- PASSED: loginSuccessTest
+15:11:27.102 [Test worker] INFO  com.phonebook.core.TestBase -- Stop test
+15:11:27.102 [Test worker] INFO  com.phonebook.core.TestBase -- ==================================================
+15:11:27.104 [Test worker] INFO  com.phonebook.core.TestBase -- Start test: loginSuccessTest2 with data []
+15:11:28.292 [Test worker] INFO  com.phonebook.core.TestBase -- PASSED: loginSuccessTest2
+15:11:28.292 [Test worker] INFO  com.phonebook.core.TestBase -- Stop test
+15:11:28.292 [Test worker] INFO  com.phonebook.core.TestBase -- ==================================================
+15:11:28.298 [Test worker] INFO  com.phonebook.core.TestBase -- Start test: getAllContactsSuccessTest with data []
+15:11:29.549 [Test worker] INFO  com.phonebook.core.TestBase -- PASSED: getAllContactsSuccessTest
+15:11:29.549 [Test worker] INFO  com.phonebook.core.TestBase -- Stop test
+15:11:29.549 [Test worker] INFO  com.phonebook.core.TestBase -- ==================================================
+15:11:29.549 [Test worker] INFO  com.phonebook.core.TestBase -- Start test: addContactSuccessTest with data []
+15:11:30.790 [Test worker] INFO  com.phonebook.core.TestBase -- PASSED: addContactSuccessTest
+15:11:30.790 [Test worker] INFO  com.phonebook.core.TestBase -- Stop test
+15:11:30.790 [Test worker] INFO  com.phonebook.core.TestBase -- ==================================================
+15:11:30.790 [Test worker] INFO  com.phonebook.core.TestBase -- Start test: deleteContactByIdSuccessTest with data []
+15:11:32.554 [Test worker] INFO  com.phonebook.core.TestBase -- PASSED: deleteContactByIdSuccessTest
+15:11:32.554 [Test worker] INFO  com.phonebook.core.TestBase -- Stop test
+15:11:32.554 [Test worker] INFO  com.phonebook.core.TestBase -- ==================================================

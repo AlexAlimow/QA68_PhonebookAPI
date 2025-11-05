@@ -4,6 +4,7 @@ import com.phonebook.core.TestBase;
 import com.phonebook.dto.AuthRequestDto;
 import com.phonebook.dto.AuthResponseDto;
 import com.phonebook.dto.ErrorDto;
+import com.phonebook.utils.MyDataProvider;
 import io.restassured.http.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,12 +18,8 @@ public class LoginTests extends TestBase {
 
     @Test
     public void loginSuccessTest() {
-        AuthResponseDto dto = given()
-                .contentType(ContentType.JSON)
-                .body(auth)
-                .when()
-                .post("user/login/usernamepassword")
-                .then()
+        //AuthResponseDto dto =
+        app.getUser().login(auth)
                 .assertThat().statusCode(200)
                 .extract().response().as(AuthResponseDto.class);
         //System.out.println(dto.getToken());
@@ -30,28 +27,18 @@ public class LoginTests extends TestBase {
 
     @Test
     public void loginSuccessTest2() {
-        String responseToken = given()
-                .contentType(ContentType.JSON)
-                .body(auth)
-                .when()
-                .post("user/login/usernamepassword")
-                .then()
+        //String responseToken =
+        app.getUser().login(auth)
                 .assertThat().statusCode(200)
                 .extract().path("token");
         //System.out.println(responseToken);
     }
 
     // assert with TestNG
-    @Test
-    public void liginWithWrongPasswordTest() {
-        ErrorDto errorDto = given()
-                .contentType(ContentType.JSON)
-                .body(AuthRequestDto.builder()
-                        .username("gorlum007user@gmail.com")
-                        .password("aawda!fgg88"))
-                .when()
-                .post("user/login/usernamepassword")
-                .then()
+
+    @Test(dataProviderClass = MyDataProvider.class, dataProvider = "loginWithWrongPasswordFormCsv")
+    public void loginWithWrongPasswordTest(AuthRequestDto authRequestDto) {
+        ErrorDto errorDto = app.getUser().login(authRequestDto)
                 .assertThat().statusCode(401)
                 .extract().response().as(ErrorDto.class);
         Assert.assertEquals(errorDto.getError(), "Unauthorized");
@@ -61,7 +48,7 @@ public class LoginTests extends TestBase {
 
     //assert with RestAssured
     @Test
-    public void  loginWithWrongEmailTest(){
+    public void loginWithWrongEmailTest() {
         given()
                 .contentType(ContentType.JSON)
                 .body(AuthRequestDto.builder()
@@ -71,6 +58,6 @@ public class LoginTests extends TestBase {
                 .post("user/login/usernamepassword")
                 .then()
                 .assertThat().statusCode(401)
-                .assertThat().body("message",equalTo("Login or Password incorrect"));
+                .assertThat().body("message", equalTo("Login or Password incorrect"));
     }
 }

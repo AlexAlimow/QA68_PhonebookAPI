@@ -1,0 +1,7 @@
+14:48:27.919 [main] INFO  org.testng.internal.Utils -- [TestNG] Running:
+  C:\Users\gorlu\AppData\Local\JetBrains\IdeaIC2025.2\temp-testng-customsuite.xml
+
+14:48:27.995 [main] INFO  com.phonebook.core.TestBase -- Start test: loginSuccessTest with data []
+14:48:31.453 [main] INFO  com.phonebook.core.TestBase -- PASST: loginSuccessTest
+14:48:31.453 [main] INFO  com.phonebook.core.TestBase -- Stop test
+14:48:31.453 [main] INFO  com.phonebook.core.TestBase -- ==================================================
